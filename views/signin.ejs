@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Sign In</title>
+  <%- include('./partials/head') %>
+</head>
+
+<body>
+  <%- include('./partials/scripts') %>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+         Please login to continue
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    </div>
+
+      <div class="container mt-4">
+        <form action="/user/signin" method="post">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            name="email"
+            aria-describedby="email">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input 
+            type="password" 
+            class="form-control" 
+            name="password"
+            id="password">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Blog Post</title>
+    <%- include('./partials/head') %>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .blog-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 20px;
+            }
+
+            .blog-author {
+                display: flex;
+                align-items: center;
+            }
+
+            .author-info {
+                margin-left: 15px;
+            }
+
+            .blog-cover {
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            .btn-category {
+                border-radius: 20px;
+            }
+
+            .blog-content {
+                margin-top: 20px;
+            }
+        </style>
+</head>
+
+<body>
+
+
+    <%- include('./partials/nav') %>
+        <div class="container mt-5 mb-3">
+            <!-- Blog Header -->
+            <div class="blog-header">
+                <h1 class="font-weight-bold">
+                    <%= blog.title %>
+                </h1>
+                <div class="d-flex align-items-center">
+                    <button class="btn btn-outline-secondary btn-category">Activities</button>
+                </div>
+            </div>
+
+            <!-- Author Info -->
+            <div class="blog-author mb-4">
+                <img src="<%= blog.author.profilePictureURL %>" class="rounded-circle author-avatar">
+                <div class="author-info">
+                    <h6 class="mb-0">
+                        <%= blog.author.fullName %>
+                    </h6>
+                </div>
+                <div class="ml-auto text-muted">
+                    <small>
+                        <%= blog.date.toLocaleDateString('en-US', { month: 'short' , day: 'numeric' , year: 'numeric'
+                            })%>
+                    </small>
+                </div>
+            </div>
+
+            <!-- Blog Cover Image -->
+            <img src="<%= blog.coverPictureUrl %>" class="blog-cover" alt="Blog Cover">
+
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <%= blog.body %>
+            </div>
+        </div>
+
+        <div class="container mt-3">
+            <h1>Comments (<%= comments.length %>)</h1>
+            <% if (locals.user) { %>
+            <div class="mb-3">
+                <form action="/blog/comment/<%= blog._id %>" method="post">
+                    <label for="body" class="form-label" >Comment here</label>
+                    <textarea class="form-control" name="content" id="content" aria-describedby="content" rows="3" required></textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Post Comment</button>
+                </form>
+                <% } %>
+            </div>
+            <div class="container mt-3">
+                <% comments.forEach(comment => { %>
+                 <img src="<%= comment.author.profilePictureUrl%>" width="50px"/>
+                 <%= comment.author.fullName%>:
+                 <pre><%= comment.content%></pre>
+                <% }) %>
+            </div>
+
+            
+        </div>
+
+
+
+
+
+
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>

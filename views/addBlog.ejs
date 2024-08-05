@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Add Blog</title>
+    <%- include('./partials/head') %>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+        <div class="container mt-3">
+            <form class="row g-3" action="/blog" method="POST" enctype="multipart/form-data">
+                <div class="col-md-4">
+                    <label for="validationServer01" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" aria-describedby="title"
+                        required>
+
+                </div>
+                <div class="col-md-4">
+                    <label for="validationServer02" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" aria-describedby="date" value=<%=new
+                        Date().toISOString().split('T')[0] %> required>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="body" class="form-label">Description</label>
+                        <textarea class="form-control" name="body" id="body" aria-describedby="body" rows="3" required></textarea>
+                    </div>
+                    <label for="coverImage" class="form-label">Upload a Cover Image</label>
+                    <div class="input-group mb-3">
+                        <input type="file" name="coverImage" class="form-control" aria-describedby="coverImage" id="coverImage">
+                        <label class="input-group-text" for="coverImage">Upload</label>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+
+            </form>
+        </div>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>
